@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'rest-client'
+require 'uri'
+require 'json'
+
+res = RestClient.get "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=#{URI.escape(ARGV.join(' '))}"
+`surf #{JSON.parse(res.body)['responseData']['results'][0]['url']}`
