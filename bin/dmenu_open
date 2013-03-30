@@ -1,3 +1,11 @@
 #!/bin/sh
 
-:o `echo -n | dmenu`
+HISTORY_PATH="$HOME/.dmenu_open_history"
+touch "$HISTORY_PATH"
+WORD=`cat $HISTORY_PATH | dmenu`
+if [ $(grep $WORD "$HISTORY_PATH" -c) -ne 1 ]
+then
+    echo $WORD >> "$HISTORY_PATH"
+fi
+:o "$WORD"
+
